@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="ZiyoHub – Bilim, Ko'ngilochar va Foydali Asboblar portali. Kalkulyator, tarjima, o'yinlar, ob-havo va ko'proq!"/>
+  <meta name="keywords" content="ZiyoHub, uzbek sayt, kalkulyator, o'yinlar, tarjima, ob-havo"/>
+  <meta name="author" content="ZiyoHub Team"/>
+  <meta property="og:title" content="ZiyoHub – Eng Qiziqarli Portal"/>
+  <meta property="og:description" content="Bilim, ko'ngil ochar va foydali asboblar bir joyda!"/>
+  <meta property="og:type" content="website"/>
+  <title>ZiyoHub – Bilim & Ko'ngilochar Portal</title>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#7c3aed"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="ZiyoHub"/>
+  <link rel="apple-touch-icon" href="icon-192.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a14;
+      --surface: #13131f;
+      --card: #1a1a2e;
+      --border: #2a2a4a;
+      --accent1: #7c3aed;
+      --accent2: #06b6d4;
+      --accent3: #f59e0b;
+      --accent4: #10b981;
+      --accent5: #f43f5e;
+      --text: #e8e8f0;
+      --muted: #8888aa;
+      --white: #ffffff;
+      --glow1: rgba(124,58,237,0.3);
+      --glow2: rgba(6,182,212,0.3);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent1); border-radius: 3px; }
+
+    /* BACKGROUND PARTICLES */
+    #particles {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .particle {
+      position: absolute; border-radius: 50%;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) scale(0); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(10,10,20,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.4rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      display: flex; align-items: center; gap: 10px; cursor: pointer;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .nav-links { display: flex; gap: 0.2rem; }
+    .nav-btn {
+      background: none; border: none; color: var(--muted);
+      font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 600;
+      padding: 8px 14px; border-radius: 8px; cursor: pointer;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .nav-btn:hover { color: var(--text); background: var(--border); }
+    .nav-btn.active { color: var(--accent2); background: rgba(6,182,212,0.1); }
+
+    /* HERO */
+    #hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 2rem 4rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(124,58,237,0.15); border: 1px solid var(--accent1);
+      color: var(--accent1); padding: 6px 16px; border-radius: 100px;
+      font-size: 0.8rem; font-weight: 700; margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease;
+    }
+    .hero-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      font-weight: 900; line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease 0.1s both;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 50%, var(--accent3) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--muted); max-width: 600px;
+      margin: 0 auto 2.5rem; line-height: 1.7;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeInUp 0.8s ease 0.3s both;
+    }
+    .btn {
+      padding: 14px 28px; border-radius: 12px; font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem; font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: white; box-shadow: 0 4px 24px var(--glow1);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--glow1); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--card); border-color: var(--accent1); }
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 4rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 2rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--accent2), var(--accent4));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    /* SECTION */
+    section { position: relative; z-index: 1; padding: 5rem 2rem; }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-tag {
+      display: inline-block;
+      background: rgba(6,182,212,0.1); color: var(--accent2);
+      border: 1px solid rgba(6,182,212,0.3);
+      padding: 4px 14px; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .section-desc { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+    /* TOOLS GRID */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+    }
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 1.75rem;
+      transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .tool-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent1)), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .tool-card:hover { border-color: var(--card-accent, var(--accent1)); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+    .tool-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .tool-name { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 700; }
+    .tool-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.5; }
+
+    /* INPUT/CONTROLS */
+    input[type="text"], input[type="number"], textarea, select {
+      width: 100%; background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); padding: 10px 14px; border-radius: 10px;
+      font-family: 'Nunito', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent1); }
+    textarea { resize: vertical; min-height: 80px; }
+    select option { background: var(--surface); }
+
+    .mini-btn {
+      padding: 8px 16px; border-radius: 8px; font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.2s;
+    }
+    .mb-primary { background: var(--accent1); color: white; }
+    .mb-primary:hover { background: #6d28d9; }
+    .mb-secondary { background: var(--border); color: var(--text); }
+    .mb-secondary:hover { background: var(--accent1); color: white; }
+    .mb-success { background: var(--accent4); color: white; }
+    .mb-danger { background: var(--accent5); color: white; }
+    .mb-warn { background: var(--accent3); color: #1a1a00; }
+    .result-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px; margin-top: 10px;
+      font-size: 0.9rem; min-height: 40px; word-break: break-all;
+      transition: all 0.3s;
+    }
+    .result-big {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.6rem; font-weight: 700; text-align: center; padding: 1rem;
+      background: linear-gradient(135deg, var(--accent2), var(--accent4));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .flex-row { display: flex; gap: 8px; align-items: center; }
+    .flex-wrap { flex-wrap: wrap; }
+
+    /* CALCULATOR */
+    .calc-display {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px; text-align: right;
+      margin-bottom: 12px;
+    }
+    .calc-prev { font-size: 0.8rem; color: var(--muted); min-height: 20px; }
+    .calc-curr { font-family: 'Unbounded', sans-serif; font-size: 2rem; font-weight: 700; word-break: break-all; }
+    .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .calc-btn {
+      padding: 14px; border-radius: 10px; font-family: 'Unbounded', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.15s;
+    }
+    .calc-btn:active { transform: scale(0.95); }
+    .cb-num { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .cb-num:hover { background: var(--border); }
+    .cb-op { background: rgba(124,58,237,0.2); color: var(--accent1); border: 1px solid rgba(124,58,237,0.3); }
+    .cb-op:hover { background: var(--accent1); color: white; }
+    .cb-eq { background: linear-gradient(135deg, var(--accent1), var(--accent2)); color: white; }
+    .cb-eq:hover { opacity: 0.9; }
+    .cb-clear { background: rgba(244,63,94,0.15); color: var(--accent5); border: 1px solid rgba(244,63,94,0.3); }
+    .cb-clear:hover { background: var(--accent5); color: white; }
+    .cb-zero { grid-column: span 2; }
+
+    /* COLOR PICKER */
+    .color-preview {
+      width: 100%; height: 80px; border-radius: 12px; margin-bottom: 10px;
+      border: 1px solid var(--border); transition: background 0.3s;
+    }
+    .color-swatch-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .swatch {
+      width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
+      border: 2px solid transparent; transition: all 0.2s; flex-shrink: 0;
+    }
+    .swatch:hover { transform: scale(1.15); border-color: white; }
+
+    /* PASSWORD GEN */
+    .strength-bar { height: 6px; border-radius: 3px; margin-top: 8px; transition: all 0.3s; }
+
+    /* QUIZ */
+    .quiz-q { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.4; }
+    .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+    .quiz-opt {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px; cursor: pointer;
+      font-size: 0.9rem; transition: all 0.2s; text-align: left;
+    }
+    .quiz-opt:hover { border-color: var(--accent2); background: rgba(6,182,212,0.05); }
+    .quiz-opt.correct { border-color: var(--accent4); background: rgba(16,185,129,0.1); color: var(--accent4); }
+    .quiz-opt.wrong { border-color: var(--accent5); background: rgba(244,63,94,0.1); color: var(--accent5); }
+    .quiz-score { text-align: center; padding: 1rem; font-size: 1.3rem; font-weight: 700; }
+
+    /* TIMER */
+    .timer-display {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 3rem; font-weight: 900; text-align: center;
+      background: linear-gradient(135deg, var(--accent3), var(--accent5));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      padding: 1rem; letter-spacing: 0.05em;
+    }
+
+    /* TYPING TEST */
+    .typing-text {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px; font-size: 1rem; line-height: 1.8;
+      margin-bottom: 10px; min-height: 70px;
+    }
+    .typing-text .correct { color: var(--accent4); }
+    .typing-text .wrong { color: var(--accent5); background: rgba(244,63,94,0.1); border-radius: 2px; }
+    .typing-text .current { background: var(--accent2); color: var(--bg); border-radius: 2px; }
+
+    /* WEATHER CARD */
+    .weather-icon { font-size: 4rem; text-align: center; line-height: 1; }
+    .weather-temp {
+      font-family: 'Unbounded', sans-serif; font-size: 3rem; font-weight: 900;
+      text-align: center;
+      background: linear-gradient(135deg, var(--accent3), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* CURRENCY */
+    .currency-flag { font-size: 1.5rem; }
+    .rate-display {
+      font-family: 'Unbounded', sans-serif; font-size: 1.5rem; font-weight: 700;
+      color: var(--accent3); text-align: center; padding: 0.5rem;
+    }
+
+    /* SNAKE GAME */
+    #snakeCanvas {
+      display: block; margin: 0 auto; border-radius: 12px;
+      border: 2px solid var(--accent1);
+      background: var(--surface);
+      cursor: pointer;
+    }
+    .game-score {
+      text-align: center; font-family: 'Unbounded', sans-serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--accent3);
+      margin-bottom: 8px;
+    }
+
+    /* NOTES */
+    .note-list { display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto; }
+    .note-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px; font-size: 0.85rem;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 8px; animation: fadeIn 0.3s ease;
+    }
+    .note-item button {
+      background: none; border: none; color: var(--accent5); cursor: pointer;
+      font-size: 1rem; flex-shrink: 0;
+    }
+
+    /* WORD COUNTER */
+    .wc-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 10px; }
+    .wc-stat {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px; text-align: center;
+    }
+    .wc-stat-val { font-family: 'Unbounded', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--accent2); }
+    .wc-stat-key { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+
+    /* MEME GENERATOR */
+    .meme-canvas-wrap { text-align: center; }
+    #memeCanvas { border-radius: 12px; max-width: 100%; border: 1px solid var(--border); }
+
+    /* PROGRESS */
+    .progress-bar-wrap { background: var(--surface); border-radius: 100px; height: 10px; overflow: hidden; margin-top: 8px; }
+    .progress-bar-fill { height: 100%; border-radius: 100px; transition: width 0.4s ease; }
+
+    /* TOAST */
+    #toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+      background: var(--card); border: 1px solid var(--accent4);
+      color: var(--accent4); padding: 12px 20px; border-radius: 12px;
+      font-weight: 700; font-size: 0.9rem;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.3s; pointer-events: none;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* FOOTER */
+    footer {
+      position: relative; z-index: 1;
+      background: var(--surface); border-top: 1px solid var(--border);
+      text-align: center; padding: 3rem 2rem;
+    }
+    .footer-logo {
+      font-family: 'Unbounded', sans-serif; font-size: 1.5rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent2); }
+    .footer-copy { color: var(--muted); font-size: 0.8rem; }
+
+    /* ANIMATIONS */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 var(--glow1); }
+      50% { box-shadow: 0 0 0 12px rgba(124,58,237,0); }
+    }
+
+    /* HAMBURGER BUTTON */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 6px; z-index: 1100;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* MOBILE DRAWER */
+    .nav-drawer {
+      display: none;
+      position: fixed; top: 64px; left: 0; right: 0; z-index: 999;
+      background: rgba(10,10,20,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 1rem;
+      gap: 4px;
+      transform: translateY(-10px); opacity: 0;
+      transition: all 0.3s;
+    }
+    .nav-drawer.open { display: flex; transform: translateY(0); opacity: 1; }
+    .nav-drawer .nav-btn { text-align: left; font-size: 1rem; padding: 12px 16px; }
+
+    /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+    /* Tablet: 768px */
+    @media(max-width: 768px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .tools-grid { grid-template-columns: 1fr; gap: 1rem; }
+      section { padding: 3.5rem 1.2rem; }
+      #hero { padding: 5rem 1.2rem 3rem; }
+      .hero-stats { gap: 1.5rem; }
+      .stat-num { font-size: 1.6rem; }
+      .wc-stat-grid { grid-template-columns: repeat(2,1fr); }
+      .calc-curr { font-size: 1.6rem; }
+      .timer-display { font-size: 2.2rem; }
+    }
+
+    /* Mobile: 480px */
+    @media(max-width: 480px) {
+      nav { padding: 0 1rem; }
+      .logo { font-size: 1.1rem; }
+      .logo-icon { width: 30px; height: 30px; font-size: 0.95rem; }
+      #hero { padding: 4.5rem 1rem 2.5rem; }
+      .hero-title { font-size: clamp(1.7rem, 8vw, 2.8rem); }
+      .hero-sub { font-size: 0.95rem; }
+      .hero-btns { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; justify-content: center; }
+      .hero-stats { gap: 1rem; }
+      .stat-num { font-size: 1.4rem; }
+      section { padding: 3rem 1rem; }
+      .section-title { font-size: clamp(1.3rem, 6vw, 2rem); }
+      .tool-card { padding: 1.25rem; border-radius: 16px; }
+      .calc-grid { gap: 6px; }
+      .calc-btn { padding: 11px 6px; font-size: 0.9rem; border-radius: 8px; }
+      .calc-curr { font-size: 1.4rem; }
+      .timer-display { font-size: 2rem; letter-spacing: 0.02em; }
+      #snakeCanvas { width: 100%; height: auto; max-width: 300px; }
+      .flex-row { flex-wrap: wrap; }
+      .flex-row input, .flex-row select { min-width: 0; }
+      .wc-stat-grid { grid-template-columns: repeat(2,1fr); gap: 6px; }
+      .wc-stat-val { font-size: 1.1rem; }
+      .tabs .tab { font-size: 0.72rem; padding: 7px 4px; }
+      .mini-btn { padding: 8px 12px; font-size: 0.8rem; }
+      .result-big { font-size: 1.2rem; }
+      .rate-display { font-size: 1.2rem; }
+      .mb-group { gap: 5px; }
+      #toast { bottom: 1rem; right: 1rem; left: 1rem; text-align: center; }
+      footer { padding: 2rem 1rem; }
+      .footer-links { gap: 1rem; }
+      #memGrid { grid-template-columns: repeat(4,1fr); gap: 5px; }
+      #memGrid > div { height: 48px !important; font-size: 1.2rem !important; }
+      .color-swatch-row { gap: 5px; }
+      .swatch { width: 28px; height: 28px; }
+      #memeCanvas { width: 100%; height: auto; }
+      .hero-badge { font-size: 0.72rem; padding: 5px 12px; }
+    }
+
+    /* Very small: 360px */
+    @media(max-width: 360px) {
+      .hero-title { font-size: 1.5rem; }
+      .calc-btn { padding: 9px 4px; font-size: 0.8rem; }
+      .tabs .tab { font-size: 0.65rem; padding: 6px 2px; }
+      .tool-name { font-size: 0.9rem; }
+    }
+
+    /* Touch improvements */
+    @media(hover: none) {
+      .tool-card:hover { transform: none; box-shadow: none; }
+      .btn:hover { transform: none; }
+      .mini-btn, .calc-btn, .quiz-opt { min-height: 44px; }
+      .nav-btn { min-height: 44px; }
+    }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* BG GRID */
+    .bg-grid {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.15; pointer-events: none; z-index: 0;
+    }
+
+    /* GRADIENT ORBS */
+    .orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(80px); pointer-events: none; z-index: 0;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .orb1 { width: 400px; height: 400px; top: -100px; left: -100px; background: rgba(124,58,237,0.12); }
+    .orb2 { width: 300px; height: 300px; bottom: 100px; right: -100px; background: rgba(6,182,212,0.1); animation-delay: -4s; }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0,0); }
+      50% { transform: translate(30px, -30px); }
+    }
+
+    .mb-group { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+
+    .tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; }
+    .tag-purple { background: rgba(124,58,237,0.15); color: var(--accent1); }
+    .tag-cyan { background: rgba(6,182,212,0.15); color: var(--accent2); }
+    .tag-green { background: rgba(16,185,129,0.15); color: var(--accent4); }
+
+    /* TABS */
+    .tabs { display: flex; gap: 4px; margin-bottom: 1rem; background: var(--surface); border-radius: 10px; padding: 4px; }
+    .tab {
+      flex: 1; padding: 8px; border-radius: 8px; border: none;
+      background: none; color: var(--muted); font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    }
+    .tab.active { background: var(--accent1); color: white; }
+
+    /* RANGE */
+    input[type=range] {
+      -webkit-appearance: none; width: 100%; height: 6px;
+      background: var(--border); border-radius: 3px; outline: none; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px;
+      border-radius: 50%; background: var(--accent1); cursor: pointer;
+    }
+
+    /* FLIP CARD */
+    .flip-card { perspective: 1000px; cursor: pointer; height: 120px; }
+    .flip-inner {
+      position: relative; width: 100%; height: 100%;
+      transition: transform 0.6s; transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-face, .flip-back {
+      position: absolute; width: 100%; height: 100%;
+      backface-visibility: hidden; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 700; text-align: center; padding: 1rem;
+    }
+    .flip-face { background: var(--surface); border: 1px solid var(--accent1); color: var(--text); }
+    .flip-back { background: linear-gradient(135deg, var(--accent1), var(--accent2)); color: white; transform: rotateY(180deg); }
+
+    /* DRAG LIST */
+    .drag-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px; cursor: grab;
+      font-size: 0.9rem; display: flex; align-items: center; gap: 10px;
+      transition: all 0.2s; user-select: none;
+    }
+    .drag-item:active { cursor: grabbing; opacity: 0.7; }
+    .drag-item.drag-over { border-color: var(--accent2); background: rgba(6,182,212,0.05); }
+
+    /* LOREM */
+    .lorem-output {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px; font-size: 0.85rem;
+      line-height: 1.7; color: var(--text); max-height: 150px; overflow-y: auto;
+      white-space: pre-wrap; margin-top: 10px;
+    }
+    /* ===== OFFLINE / ONLINE BANNER ===== */
+    #netBanner {
+      position: fixed; top: 64px; left: 0; right: 0; z-index: 2000;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 10px 1rem; font-size: 0.9rem; font-weight: 700;
+      transform: translateY(-80px); transition: transform 0.4s cubic-bezier(.4,0,0,1);
+      pointer-events: none;
+    }
+    #netBanner.show { transform: translateY(0); pointer-events: auto; }
+    #netBanner.offline {
+      background: rgba(244,63,94,0.95); color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    #netBanner.online {
+      background: rgba(16,185,129,0.95); color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    #netBanner button {
+      background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+      color: white; padding: 4px 12px; border-radius: 20px;
+      font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+    }
+    #netBanner button:hover { background: rgba(255,255,255,0.35); }
+
+    /* PWA Install banner */
+    #installBanner {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(120px);
+      z-index: 2001; background: var(--card); border: 1px solid var(--accent1);
+      border-radius: 16px; padding: 14px 20px;
+      display: flex; align-items: center; gap: 14px; max-width: 380px; width: calc(100% - 2rem);
+      box-shadow: 0 8px 32px rgba(124,58,237,0.3);
+      transition: transform 0.4s cubic-bezier(.4,0,0,1);
+    }
+    #installBanner.show { transform: translateX(-50%) translateY(0); }
+    #installBanner .ib-icon { font-size: 2rem; flex-shrink: 0; }
+    #installBanner .ib-text { flex: 1; }
+    #installBanner .ib-title { font-weight: 800; font-size: 0.9rem; margin-bottom: 2px; }
+    #installBanner .ib-sub { font-size: 0.78rem; color: var(--muted); }
+    #installBanner .ib-btns { display: flex; gap: 6px; flex-shrink: 0; }
+    #installBanner .ib-install {
+      background: var(--accent1); color: white; border: none;
+      padding: 8px 14px; border-radius: 10px; font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer;
+    }
+    #installBanner .ib-dismiss {
+      background: var(--border); color: var(--muted); border: none;
+      padding: 8px 10px; border-radius: 10px; font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div id="particles"></div>
+
+<!-- TOAST -->
+<div id="toast">✅ Nusxalandi!</div>
+
+<!-- NETWORK BANNER -->
+<div id="netBanner" class="offline" role="alert">
+  <span id="netIcon">📡</span>
+  <span id="netMsg">Internet yo'q — sayt oflayn ishlayapti</span>
+  <button onclick="retryConnection()">🔄 Tekshirish</button>
+  <button onclick="dismissBanner()" style="background:transparent;border:none;color:white;font-size:1.1rem;cursor:pointer;padding:0 4px;">✕</button>
+</div>
+
+<!-- PWA INSTALL BANNER -->
+<div id="installBanner">
+  <div class="ib-icon">⚡</div>
+  <div class="ib-text">
+    <div class="ib-title">ZiyoHub-ni o'rnating!</div>
+    <div class="ib-sub">Telefonga qo'shing — internetisiz ham ishlaydi</div>
+  </div>
+  <div class="ib-btns">
+    <button class="ib-install" onclick="installPWA()">O'rnatish</button>
+    <button class="ib-dismiss" onclick="dismissInstall()">✕</button>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo" onclick="scrollTo(0,0)">
+    <div class="logo-icon">⚡</div>
+    ZiyoHub
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="scrollToSection('tools')">🔧 Asboblar</button>
+    <button class="nav-btn" onclick="scrollToSection('games')">🎮 O'yinlar</button>
+    <button class="nav-btn" onclick="scrollToSection('learn')">📚 O'rganish</button>
+    <button class="nav-btn" onclick="scrollToSection('create')">✨ Yaratish</button>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menyu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-drawer" id="navDrawer">
+  <button class="nav-btn" onclick="scrollToSection('tools');closeMenu()">🔧 Asboblar</button>
+  <button class="nav-btn" onclick="scrollToSection('games');closeMenu()">🎮 O'yinlar</button>
+  <button class="nav-btn" onclick="scrollToSection('learn');closeMenu()">📚 O'rganish</button>
+  <button class="nav-btn" onclick="scrollToSection('create');closeMenu()">✨ Yaratish</button>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">🌟 Yangi versiya chiqdi!</div>
+  <h1 class="hero-title">
+    Hammasi bir joyda —<br/><span>ZiyoHub</span>
+  </h1>
+  <p class="hero-sub">
+    Kalkulyator, tarjima, o'yinlar, matn tahrirlash, ob-havo, rang tanlash va boshqa ko'plab foydali asboblar — barchasi bepul!
+  </p>
+  <div class="hero-btns">
+    <button class="btn btn-primary" onclick="scrollToSection('tools')">🚀 Boshlash</button>
+    <button class="btn btn-outline" onclick="scrollToSection('games')">🎮 O'yin o'ynash</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" data-target="12">0</div><div class="stat-label">Foydali Asbob</div></div>
+    <div class="stat"><div class="stat-num" data-target="3">0</div><div class="stat-label">O'yin</div></div>
+    <div class="stat"><div class="stat-num" data-target="100">0</div><div class="stat-label">% Bepul</div></div>
+    <div class="stat"><div class="stat-num" data-target="24">0</div><div class="stat-label">Soat Ishlaydi</div></div>
+  </div>
+</section>
+
+<!-- TOOLS SECTION -->
+<section id="tools">
+  <div class="section-header reveal">
+    <div class="section-tag">⚙️ Asboblar</div>
+    <h2 class="section-title">Foydali Asboblar</h2>
+    <p class="section-desc">Kundalik hayotda kerak bo'ladigan barcha asboblar bu yerda</p>
+  </div>
+  <div class="tools-grid">
+
+    <!-- CALCULATOR -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent1);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(124,58,237,0.15);">🧮</div>
+        <div>
+          <div class="tool-name">Kalkulyator</div>
+          <div style="font-size:0.75rem;color:var(--muted);">To'liq funksional</div>
+        </div>
+      </div>
+      <div class="calc-display">
+        <div class="calc-prev" id="calcPrev"></div>
+        <div class="calc-curr" id="calcCurr">0</div>
+      </div>
+      <div class="calc-grid">
+        <button class="calc-btn cb-clear" onclick="calcClear()">AC</button>
+        <button class="calc-btn cb-op" onclick="calcPlusMinus()">+/-</button>
+        <button class="calc-btn cb-op" onclick="calcPercent()">%</button>
+        <button class="calc-btn cb-op" onclick="calcOp('/')">÷</button>
+        <button class="calc-btn cb-num" onclick="calcNum('7')">7</button>
+        <button class="calc-btn cb-num" onclick="calcNum('8')">8</button>
+        <button class="calc-btn cb-num" onclick="calcNum('9')">9</button>
+        <button class="calc-btn cb-op" onclick="calcOp('*')">×</button>
+        <button class="calc-btn cb-num" onclick="calcNum('4')">4</button>
+        <button class="calc-btn cb-num" onclick="calcNum('5')">5</button>
+        <button class="calc-btn cb-num" onclick="calcNum('6')">6</button>
+        <button class="calc-btn cb-op" onclick="calcOp('-')">−</button>
+        <button class="calc-btn cb-num" onclick="calcNum('1')">1</button>
+        <button class="calc-btn cb-num" onclick="calcNum('2')">2</button>
+        <button class="calc-btn cb-num" onclick="calcNum('3')">3</button>
+        <button class="calc-btn cb-op" onclick="calcOp('+')">+</button>
+        <button class="calc-btn cb-num cb-zero" onclick="calcNum('0')">0</button>
+        <button class="calc-btn cb-num" onclick="calcDot()">.</button>
+        <button class="calc-btn cb-eq" onclick="calcEqual()">=</button>
+      </div>
+    </div>
+
+    <!-- UNIT CONVERTER -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent2);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(6,182,212,0.15);">⚖️</div>
+        <div>
+          <div class="tool-name">O'lchov O'zgartirish</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Uzunlik, og'irlik, harorat</div>
+        </div>
+      </div>
+      <div class="tool-desc">Metr, kilogram, Celsius va boshqa o'lchovlarni aylantiring</div>
+      <div class="tabs">
+        <button class="tab active" onclick="setUnitTab('length',this)">📏 Uzunlik</button>
+        <button class="tab" onclick="setUnitTab('weight',this)">⚖️ Og'irlik</button>
+        <button class="tab" onclick="setUnitTab('temp',this)">🌡️ Harorat</button>
+      </div>
+      <div class="flex-row">
+        <input type="number" id="unitInput" placeholder="Qiymat kiriting" oninput="convertUnit()"/>
+      </div>
+      <select id="unitFrom" onchange="convertUnit()" style="margin-top:8px;">
+        <option value="m">Metr (m)</option>
+        <option value="km">Kilometr (km)</option>
+        <option value="cm">Santimetr (cm)</option>
+        <option value="mm">Millimetr (mm)</option>
+        <option value="ft">Fut (ft)</option>
+        <option value="in">Dyuym (in)</option>
+        <option value="mi">Milya (mi)</option>
+      </select>
+      <select id="unitTo" onchange="convertUnit()" style="margin-top:8px;">
+        <option value="km">Kilometr (km)</option>
+        <option value="m">Metr (m)</option>
+        <option value="cm">Santimetr (cm)</option>
+        <option value="mm">Millimetr (mm)</option>
+        <option value="ft">Fut (ft)</option>
+        <option value="in">Dyuym (in)</option>
+        <option value="mi">Milya (mi)</option>
+      </select>
+      <div class="result-box" id="unitResult">Natija bu yerda ko'rinadi</div>
+    </div>
+
+    <!-- PASSWORD GENERATOR -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent4);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(16,185,129,0.15);">🔐</div>
+        <div>
+          <div class="tool-name">Parol Generatori</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Xavfsiz va kuchli</div>
+        </div>
+      </div>
+      <div class="tool-desc">Kuchli parol yarating — uzunligi va xarakter turlari sozlanadi</div>
+      <label style="font-size:0.85rem;color:var(--muted);">Uzunlik: <span id="pwLenVal">16</span></label>
+      <input type="range" id="pwLen" min="6" max="64" value="16" oninput="updatePwLen();genPassword()"/>
+      <div class="mb-group">
+        <label style="font-size:0.85rem;display:flex;align-items:center;gap:4px;cursor:pointer;">
+          <input type="checkbox" id="pwUpper" checked onchange="genPassword()"/> Katta harf
+        </label>
+        <label style="font-size:0.85rem;display:flex;align-items:center;gap:4px;cursor:pointer;margin-left:10px;">
+          <input type="checkbox" id="pwNum" checked onchange="genPassword()"/> Raqam
+        </label>
+        <label style="font-size:0.85rem;display:flex;align-items:center;gap:4px;cursor:pointer;margin-left:10px;">
+          <input type="checkbox" id="pwSym" onchange="genPassword()"/> Belgi
+        </label>
+      </div>
+      <div class="result-box" id="pwResult" style="font-family:monospace;letter-spacing:0.05em;cursor:pointer;" onclick="copyText('pwResult')">
+        Parol generatsiya qilinmadi
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="pwStrength" style="width:0%;background:var(--accent4);"></div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;" id="pwStrLabel">Kuch: —</div>
+      <div class="mb-group">
+        <button class="mini-btn mb-success" onclick="genPassword()">🔄 Yangi</button>
+        <button class="mini-btn mb-secondary" onclick="copyText('pwResult')">📋 Nusxalash</button>
+      </div>
+    </div>
+
+    <!-- WORD COUNTER -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent3);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(245,158,11,0.15);">📝</div>
+        <div>
+          <div class="tool-name">Matn Tahlilchisi</div>
+          <div style="font-size:0.75rem;color:var(--muted);">So'z, harf, jumla</div>
+        </div>
+      </div>
+      <div class="tool-desc">Matn statsikasini real vaqtda ko'ring</div>
+      <textarea id="wcText" placeholder="Matn kiriting..." oninput="analyzeText()"></textarea>
+      <div class="wc-stat-grid">
+        <div class="wc-stat"><div class="wc-stat-val" id="wcWords">0</div><div class="wc-stat-key">So'zlar</div></div>
+        <div class="wc-stat"><div class="wc-stat-val" id="wcChars">0</div><div class="wc-stat-key">Harflar</div></div>
+        <div class="wc-stat"><div class="wc-stat-val" id="wcSent">0</div><div class="wc-stat-key">Jumlalar</div></div>
+        <div class="wc-stat"><div class="wc-stat-val" id="wcRead">0</div><div class="wc-stat-key">O'qish (daq)</div></div>
+      </div>
+    </div>
+
+    <!-- COLOR PICKER -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent5);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(244,63,94,0.15);">🎨</div>
+        <div>
+          <div class="tool-name">Rang Tanlash</div>
+          <div style="font-size:0.75rem;color:var(--muted);">HEX, RGB konverter</div>
+        </div>
+      </div>
+      <div class="tool-desc">Ranglarni tanlang, HEX va RGB formatlarini konvert qiling</div>
+      <input type="color" id="colorPicker" value="#7c3aed" oninput="updateColor()" style="width:100%;height:50px;border-radius:10px;border:1px solid var(--border);background:none;cursor:pointer;"/>
+      <div class="color-preview" id="colorPreview" style="background:#7c3aed;margin-top:8px;"></div>
+      <div class="flex-row" style="gap:8px;margin-top:8px;">
+        <div class="result-box" id="colorHex" style="text-align:center;cursor:pointer;flex:1;" onclick="copyText('colorHex')">#7c3aed</div>
+        <div class="result-box" id="colorRgb" style="text-align:center;cursor:pointer;flex:1;" onclick="copyText('colorRgb')">rgb(124,58,237)</div>
+      </div>
+      <div class="color-swatch-row" id="swatchRow"></div>
+    </div>
+
+    <!-- TIMER / STOPWATCH -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent3);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(245,158,11,0.15);">⏱️</div>
+        <div>
+          <div class="tool-name">Taymer & Sekundomer</div>
+          <div style="font-size:0.75rem;color:var(--muted);">2 ta rejim</div>
+        </div>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="switchTimer('stopwatch',this)">⏱ Sekundomer</button>
+        <button class="tab" onclick="switchTimer('countdown',this)">⏳ Hisobga olish</button>
+      </div>
+      <div id="timerStopwatch">
+        <div class="timer-display" id="swDisplay">00:00.00</div>
+        <div class="mb-group" style="justify-content:center;">
+          <button class="mini-btn mb-success" id="swStartBtn" onclick="swStart()">▶ Start</button>
+          <button class="mini-btn mb-secondary" onclick="swReset()">⟳ Reset</button>
+          <button class="mini-btn mb-warn" onclick="swLap()">📍 Lap</button>
+        </div>
+        <div id="lapList" style="max-height:80px;overflow-y:auto;margin-top:8px;font-size:0.8rem;color:var(--muted);"></div>
+      </div>
+      <div id="timerCountdown" style="display:none;">
+        <div class="flex-row" style="margin-bottom:8px;">
+          <input type="number" id="cdMin" placeholder="Daqiqa" min="0" max="99" style="flex:1;"/>
+          <span style="color:var(--muted);">:</span>
+          <input type="number" id="cdSec" placeholder="Sekund" min="0" max="59" style="flex:1;"/>
+        </div>
+        <div class="timer-display" id="cdDisplay">00:00</div>
+        <div class="mb-group" style="justify-content:center;">
+          <button class="mini-btn mb-success" onclick="cdStart()">▶ Start</button>
+          <button class="mini-btn mb-secondary" onclick="cdReset()">⟳ Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent2);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(6,182,212,0.15);">📒</div>
+        <div>
+          <div class="tool-name">Tezkor Eslatma</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Lokal saqlash</div>
+        </div>
+      </div>
+      <div class="tool-desc">Eslatmalarni yozing — sahifa yopilganda ham saqlanadi</div>
+      <div class="flex-row">
+        <input type="text" id="noteInput" placeholder="Eslatma yozing..." onkeydown="if(event.key==='Enter')addNote()"/>
+        <button class="mini-btn mb-primary" onclick="addNote()">+</button>
+      </div>
+      <div class="note-list" id="noteList" style="margin-top:10px;"></div>
+    </div>
+
+    <!-- CURRENCY -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent4);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(16,185,129,0.15);">💱</div>
+        <div>
+          <div class="tool-name">Valyuta Kalkulyatori</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Taxminiy kurslar</div>
+        </div>
+      </div>
+      <div class="tool-desc">USD, EUR, RUB, UZS va boshqalar orasida aylantiring</div>
+      <input type="number" id="currAmount" value="100" placeholder="Miqdor" oninput="convertCurrency()" style="margin-bottom:8px;"/>
+      <div class="flex-row">
+        <select id="currFrom" onchange="convertCurrency()" style="flex:1;">
+          <option value="USD">🇺🇸 USD</option>
+          <option value="EUR">🇪🇺 EUR</option>
+          <option value="RUB">🇷🇺 RUB</option>
+          <option value="UZS">🇺🇿 UZS</option>
+          <option value="GBP">🇬🇧 GBP</option>
+          <option value="JPY">🇯🇵 JPY</option>
+        </select>
+        <button class="mini-btn mb-secondary" onclick="swapCurrency()">⇄</button>
+        <select id="currTo" onchange="convertCurrency()" style="flex:1;">
+          <option value="UZS">🇺🇿 UZS</option>
+          <option value="USD">🇺🇸 USD</option>
+          <option value="EUR">🇪🇺 EUR</option>
+          <option value="RUB">🇷🇺 RUB</option>
+          <option value="GBP">🇬🇧 GBP</option>
+          <option value="JPY">🇯🇵 JPY</option>
+        </select>
+      </div>
+      <div class="rate-display" id="currResult">—</div>
+      <div style="font-size:0.75rem;color:var(--muted);text-align:center;">*Taxminiy kurslar (2025)</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GAMES SECTION -->
+<section id="games">
+  <div class="section-header reveal">
+    <div class="section-tag">🎮 O'yinlar</div>
+    <h2 class="section-title">Mini O'yinlar</h2>
+    <p class="section-desc">Ko'nglingizni ko'taring va miyangizni charxlang!</p>
+  </div>
+  <div class="tools-grid">
+
+    <!-- SNAKE -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent4);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(16,185,129,0.15);">🐍</div>
+        <div>
+          <div class="tool-name">Snake O'yini</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Klassik o'yin</div>
+        </div>
+      </div>
+      <div class="game-score">Ball: <span id="snakeScore">0</span> | Rekord: <span id="snakeBest">0</span></div>
+      <canvas id="snakeCanvas" width="280" height="240" style="max-width:100%;touch-action:none;"></canvas>
+      <div class="mb-group" style="justify-content:center;margin-top:8px;">
+        <button class="mini-btn mb-success" onclick="startSnake()">▶ Boshlash</button>
+        <button class="mini-btn mb-secondary" onclick="resetSnake()">⟳ Reset</button>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:6px;">
+        Boshqarish: ← → ↑ ↓ yoki WASD
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent2);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(6,182,212,0.15);">🧠</div>
+        <div>
+          <div class="tool-name">Bilim Testi</div>
+          <div style="font-size:0.75rem;color:var(--muted);">10 ta savol</div>
+        </div>
+      </div>
+      <div id="quizContainer">
+        <div style="text-align:center;padding:2rem;">
+          <div style="font-size:2rem;margin-bottom:1rem;">🎯</div>
+          <div style="font-weight:700;margin-bottom:0.5rem;">Bilimingizni sinab ko'ring!</div>
+          <div style="font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;">10 ta savol • Turli mavzular</div>
+          <button class="mini-btn mb-primary" onclick="startQuiz()">🚀 Testni boshlash</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMORY GAME -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent3);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(245,158,11,0.15);">🧩</div>
+        <div>
+          <div class="tool-name">Xotira O'yini</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Juftliklarni toping</div>
+        </div>
+      </div>
+      <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;">
+        Urinish: <strong id="memTries">0</strong> | Juftlik: <strong id="memPairs">0</strong>/8
+      </div>
+      <div id="memGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;"></div>
+      <button class="mini-btn mb-primary" onclick="startMemory()" style="margin-top:8px;width:100%;">🔄 Yangi o'yin</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- LEARN SECTION -->
+<section id="learn">
+  <div class="section-header reveal">
+    <div class="section-tag">📚 O'rganish</div>
+    <h2 class="section-title">O'rganish Markazi</h2>
+    <p class="section-desc">Tez yozish, flashcard va boshqalar</p>
+  </div>
+  <div class="tools-grid">
+
+    <!-- TYPING TEST -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent1);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(124,58,237,0.15);">⌨️</div>
+        <div>
+          <div class="tool-name">Tez Yozish Testi</div>
+          <div style="font-size:0.75rem;color:var(--muted);">WPM o'lchash</div>
+        </div>
+      </div>
+      <div id="typingTextDisplay" class="typing-text">Boshlash uchun quyida yozishni boshlang...</div>
+      <input type="text" id="typingInput" placeholder="Bu yerga yozing..." oninput="handleTyping()" autocomplete="off" autocorrect="off"/>
+      <div class="wc-stat-grid" style="margin-top:8px;">
+        <div class="wc-stat"><div class="wc-stat-val" id="typingWPM">0</div><div class="wc-stat-key">WPM</div></div>
+        <div class="wc-stat"><div class="wc-stat-val" id="typingAcc">100</div><div class="wc-stat-key">% To'g'ri</div></div>
+      </div>
+      <button class="mini-btn mb-secondary" onclick="resetTyping()" style="margin-top:8px;">🔄 Yangi matn</button>
+    </div>
+
+    <!-- FLASHCARD -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent2);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(6,182,212,0.15);">🃏</div>
+        <div>
+          <div class="tool-name">Flashcard</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Inglizcha so'zlar</div>
+        </div>
+      </div>
+      <div class="tool-desc">Bosing — tarjimani ko'ring</div>
+      <div class="flip-card" id="flashCard" onclick="flipCard()">
+        <div class="flip-inner" id="flashInner">
+          <div class="flip-face" id="flashFront">📖 Bosing!</div>
+          <div class="flip-back" id="flashBack">—</div>
+        </div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:6px;" id="flashProgress">0 / 0</div>
+      <div class="mb-group" style="justify-content:center;margin-top:8px;">
+        <button class="mini-btn mb-secondary" onclick="prevFlash()">◀ Oldingi</button>
+        <button class="mini-btn mb-primary" onclick="nextFlash()">Keyingi ▶</button>
+      </div>
+    </div>
+
+    <!-- LOREM IPSUM -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent4);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(16,185,129,0.15);">📄</div>
+        <div>
+          <div class="tool-name">Matn Generator</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Lorem Ipsum + O'zbek</div>
+        </div>
+      </div>
+      <div class="tool-desc">Test uchun matn yarating</div>
+      <div class="flex-row">
+        <select id="loremLang" style="flex:1;">
+          <option value="lorem">Lorem Ipsum</option>
+          <option value="uz">O'zbekcha</option>
+        </select>
+        <input type="number" id="loremCount" value="3" min="1" max="10" style="width:60px;"/>
+        <button class="mini-btn mb-primary" onclick="genLorem()">✨</button>
+      </div>
+      <div class="lorem-output" id="loremOutput">Matn yaratish uchun bosing...</div>
+      <button class="mini-btn mb-secondary" onclick="copyText('loremOutput')" style="margin-top:8px;">📋 Nusxalash</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CREATE SECTION -->
+<section id="create">
+  <div class="section-header reveal">
+    <div class="section-tag">✨ Yaratish</div>
+    <h2 class="section-title">Ijodiy Asboblar</h2>
+    <p class="section-desc">Yarating, chizling va kashf eting</p>
+  </div>
+  <div class="tools-grid">
+
+    <!-- MEME GENERATOR -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent5);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(244,63,94,0.15);">😂</div>
+        <div>
+          <div class="tool-name">Meme Yasatgich</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Rasm + matn</div>
+        </div>
+      </div>
+      <div class="tool-desc">Rasmingizga yuqori va pastki matn qo'shing</div>
+      <input type="text" id="memeTop" placeholder="Yuqori matn..." style="margin-bottom:8px;"/>
+      <input type="text" id="memeBottom" placeholder="Pastki matn..."/>
+      <div class="mb-group">
+        <input type="color" id="memeBg" value="#1a1a2e" title="Fon rangi" style="width:40px;height:36px;border-radius:8px;border:none;cursor:pointer;"/>
+        <select id="memeEmoji" style="flex:1;">
+          <option value="😂">😂 Kulgili</option>
+          <option value="🤔">🤔 O'ylab ko'ring</option>
+          <option value="😎">😎 Cool</option>
+          <option value="🔥">🔥 Olov</option>
+          <option value="💀">💀 Vafot</option>
+          <option value="🐸">🐸 Baqacha</option>
+        </select>
+        <button class="mini-btn mb-primary" onclick="drawMeme()">🎨 Chiz</button>
+      </div>
+      <div class="meme-canvas-wrap" style="margin-top:10px;">
+        <canvas id="memeCanvas" width="280" height="200"></canvas>
+      </div>
+      <button class="mini-btn mb-secondary" onclick="downloadMeme()" style="margin-top:8px;width:100%;">⬇️ Yuklab olish</button>
+    </div>
+
+    <!-- QR CODE -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent3);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(245,158,11,0.15);">📱</div>
+        <div>
+          <div class="tool-name">QR Kod Generatori</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Matn → QR</div>
+        </div>
+      </div>
+      <div class="tool-desc">Istalgan matn yoki linkdan QR kod yarating</div>
+      <input type="text" id="qrInput" placeholder="Matn yoki link kiriting..." value="https://ziyohub.uz"/>
+      <div class="mb-group">
+        <input type="color" id="qrColor" value="#7c3aed" title="QR rangi" style="width:40px;height:36px;border-radius:8px;border:none;cursor:pointer;"/>
+        <button class="mini-btn mb-primary" onclick="generateQR()" style="flex:1;">📱 QR Yaratish</button>
+      </div>
+      <div id="qrOutput" style="text-align:center;margin-top:10px;min-height:100px;display:flex;align-items:center;justify-content:center;">
+        <span style="color:var(--muted);font-size:0.85rem;">QR kod bu yerda ko'rinadi</span>
+      </div>
+    </div>
+
+    <!-- DRAG & DROP TODO -->
+    <div class="tool-card reveal" style="--card-accent: var(--accent1);">
+      <div class="tool-header">
+        <div class="tool-icon" style="background: rgba(124,58,237,0.15);">📋</div>
+        <div>
+          <div class="tool-name">Vazifalar Ro'yxati</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Drag & Drop</div>
+        </div>
+      </div>
+      <div class="tool-desc">Vazifalar qo'shing va tartibini suring</div>
+      <div class="flex-row" style="margin-bottom:8px;">
+        <input type="text" id="todoInput" placeholder="Yangi vazifa..." onkeydown="if(event.key==='Enter')addTodo()"/>
+        <button class="mini-btn mb-primary" onclick="addTodo()">+</button>
+      </div>
+      <div id="todoList" style="display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">⚡ ZiyoHub</div>
+  <div class="footer-links">
+    <a href="#hero">Bosh sahifa</a>
+    <a href="#tools">Asboblar</a>
+    <a href="#games">O'yinlar</a>
+    <a href="#learn">O'rganish</a>
+    <a href="#create">Yaratish</a>
+  </div>
+  <div class="footer-copy">© 2025 ZiyoHub. Barcha huquqlar himoyalangan. 🇺🇿 O'zbekiston uchun yasalgan.</div>
+</footer>
+
+<script>
+// ===================== PARTICLES =====================
+(function() {
+  const cont = document.getElementById('particles');
+  const colors = ['#7c3aed','#06b6d4','#f59e0b','#10b981','#f43f5e'];
+  for(let i=0;i<40;i++){
+    const p = document.createElement('div');
+    p.className='particle';
+    const size = Math.random()*6+2;
+    p.style.cssText=`
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${Math.random()*15+10}s;
+      animation-delay:-${Math.random()*20}s;
+    `;
+    cont.appendChild(p);
+  }
+})();
+
+// ===================== HAMBURGER MENU =====================
+function toggleMenu(){
+  const btn=document.getElementById('hamburger');
+  const drawer=document.getElementById('navDrawer');
+  btn.classList.toggle('open');
+  drawer.classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('navDrawer').classList.remove('open');
+}
+document.addEventListener('click',e=>{
+  const nav=document.querySelector('nav');
+  const drawer=document.getElementById('navDrawer');
+  if(!nav.contains(e.target)&&!drawer.contains(e.target))closeMenu();
+});
+
+// ===================== SCROLL REVEAL =====================
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// ===================== COUNTER ANIM =====================
+function animateCounters(){
+  document.querySelectorAll('[data-target]').forEach(el=>{
+    const target=+el.dataset.target;
+    let cur=0;
+    const step=Math.ceil(target/40);
+    const t=setInterval(()=>{
+      cur+=step;
+      if(cur>=target){cur=target;clearInterval(t);}
+      el.textContent=cur+(target===100?'%':'+');
+    },40);
+  });
+}
+setTimeout(animateCounters,600);
+
+// ===================== NAV SCROLL =====================
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+}
+window.addEventListener('scroll',()=>{
+  ['tools','games','learn','create'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el){
+      const r=el.getBoundingClientRect();
+      if(r.top<=100&&r.bottom>100){
+        document.querySelectorAll('.nav-btn').forEach((b,j)=>{
+          b.classList.toggle('active',j===i);
+        });
+      }
+    }
+  });
+});
+
+// ===================== TOAST =====================
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg||'✅ Nusxalandi!';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+function copyText(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  navigator.clipboard.writeText(el.textContent).then(()=>showToast('📋 Nusxalandi!'));
+}
+
+// ===================== CALCULATOR =====================
+let calcCurrent='0',calcPrevious='',calcOperator='',calcNewNum=false;
+function calcUpdate(){
+  document.getElementById('calcCurr').textContent=calcCurrent;
+  document.getElementById('calcPrev').textContent=calcPrevious;
+}
+function calcNum(n){
+  if(calcNewNum){calcCurrent=n;calcNewNum=false;}
+  else{calcCurrent=calcCurrent==='0'?n:calcCurrent+n;}
+  calcUpdate();
+}
+function calcDot(){
+  if(!calcCurrent.includes('.')){calcCurrent+='.';calcUpdate();}
+}
+function calcOp(op){
+  calcPrevious=calcCurrent+(op==='/'?' ÷ ':op==='*'?' × ':op==='+'?' + ':' − ');
+  calcOperator=op;calcNewNum=true;calcUpdate();
+}
+function calcEqual(){
+  const a=parseFloat(calcPrevious),b=parseFloat(calcCurrent);
+  let res;
+  if(calcOperator==='/')res=b===0?'Xato':a/b;
+  else if(calcOperator==='*')res=a*b;
+  else if(calcOperator==='+')res=a+b;
+  else if(calcOperator==='-')res=a-b;
+  else return;
+  calcCurrent=parseFloat(res.toFixed(10)).toString();
+  calcPrevious='';calcOperator='';calcNewNum=true;
+  calcUpdate();
+}
+function calcClear(){calcCurrent='0';calcPrevious='';calcOperator='';calcNewNum=false;calcUpdate();}
+function calcPlusMinus(){calcCurrent=(parseFloat(calcCurrent)*-1).toString();calcUpdate();}
+function calcPercent(){calcCurrent=(parseFloat(calcCurrent)/100).toString();calcUpdate();}
+
+// ===================== UNIT CONVERTER =====================
+let currentUnitTab='length';
+const unitDefs={
+  length:{m:1,km:0.001,cm:100,mm:1000,ft:3.28084,in:39.3701,mi:0.000621371},
+  weight:{kg:1,g:1000,lb:2.20462,oz:35.274,t:0.001},
+  temp:{celsius:'base',fahrenheit:'f',kelvin:'k'}
+};
+const unitOptions={
+  length:`<option value="m">Metr (m)</option><option value="km">Kilometr (km)</option><option value="cm">Santimetr (cm)</option><option value="mm">Millimetr (mm)</option><option value="ft">Fut (ft)</option><option value="in">Dyuym (in)</option><option value="mi">Milya (mi)</option>`,
+  weight:`<option value="kg">Kilogram (kg)</option><option value="g">Gram (g)</option><option value="lb">Funt (lb)</option><option value="oz">Untsiya (oz)</option><option value="t">Tonna (t)</option>`,
+  temp:`<option value="celsius">Celsius (°C)</option><option value="fahrenheit">Fahrenheit (°F)</option><option value="kelvin">Kelvin (K)</option>`
+};
+function setUnitTab(tab,btn){
+  currentUnitTab=tab;
+  document.querySelectorAll('.tabs .tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const f=document.getElementById('unitFrom'),t=document.getElementById('unitTo');
+  f.innerHTML=unitOptions[tab];t.innerHTML=unitOptions[tab];
+  convertUnit();
+}
+function convertUnit(){
+  const val=parseFloat(document.getElementById('unitInput').value);
+  if(isNaN(val)){document.getElementById('unitResult').textContent='Raqam kiriting';return;}
+  const from=document.getElementById('unitFrom').value;
+  const to=document.getElementById('unitTo').value;
+  let res;
+  if(currentUnitTab==='temp'){
+    let c;
+    if(from==='celsius')c=val;
+    else if(from==='fahrenheit')c=(val-32)/1.8;
+    else c=val-273.15;
+    if(to==='celsius')res=c;
+    else if(to==='fahrenheit')res=c*1.8+32;
+    else res=c+273.15;
+  } else {
+    const defs=unitDefs[currentUnitTab];
+    const base=val/defs[from];
+    res=base*defs[to];
+  }
+  document.getElementById('unitResult').innerHTML=`<strong>${val} ${from}</strong> = <strong style="color:var(--accent2)">${parseFloat(res.toFixed(6))}</strong> ${to}`;
+}
+
+// ===================== PASSWORD GENERATOR =====================
+function updatePwLen(){document.getElementById('pwLenVal').textContent=document.getElementById('pwLen').value;}
+function genPassword(){
+  const len=+document.getElementById('pwLen').value;
+  let chars='abcdefghijklmnopqrstuvwxyz';
+  if(document.getElementById('pwUpper').checked)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(document.getElementById('pwNum').checked)chars+='0123456789';
+  if(document.getElementById('pwSym').checked)chars+='!@#$%^&*()_+-=[]{}';
+  let pw='';
+  for(let i=0;i<len;i++)pw+=chars[Math.floor(Math.random()*chars.length)];
+  document.getElementById('pwResult').textContent=pw;
+  const strength=Math.min(100,len*2+(document.getElementById('pwUpper').checked?15:0)+(document.getElementById('pwNum').checked?15:0)+(document.getElementById('pwSym').checked?20:0));
+  const bar=document.getElementById('pwStrength');
+  const lbl=document.getElementById('pwStrLabel');
+  bar.style.width=strength+'%';
+  if(strength<40){bar.style.background='var(--accent5)';lbl.textContent='Kuch: Zaif';}
+  else if(strength<70){bar.style.background='var(--accent3)';lbl.textContent='Kuch: O\'rta';}
+  else{bar.style.background='var(--accent4)';lbl.textContent='Kuch: Kuchli 💪';}
+}
+genPassword();
+
+// ===================== WORD COUNTER =====================
+function analyzeText(){
+  const text=document.getElementById('wcText').value;
+  const words=text.trim().split(/\s+/).filter(w=>w.length>0);
+  const sents=text.split(/[.!?]+/).filter(s=>s.trim().length>0);
+  document.getElementById('wcWords').textContent=words.length||0;
+  document.getElementById('wcChars').textContent=text.length;
+  document.getElementById('wcSent').textContent=sents.length||0;
+  document.getElementById('wcRead').textContent=Math.ceil((words.length||0)/200);
+}
+
+// ===================== COLOR PICKER =====================
+const swatchColors=['#7c3aed','#06b6d4','#f59e0b','#10b981','#f43f5e','#3b82f6','#ec4899','#14b8a6','#f97316','#6366f1','#84cc16','#ffffff'];
+(function initSwatches(){
+  const row=document.getElementById('swatchRow');
+  swatchColors.forEach(c=>{
+    const s=document.createElement('div');
+    s.className='swatch';
+    s.style.background=c;
+    s.onclick=()=>{document.getElementById('colorPicker').value=c;updateColor();};
+    row.appendChild(s);
+  });
+})();
+function updateColor(){
+  const c=document.getElementById('colorPicker').value;
+  document.getElementById('colorPreview').style.background=c;
+  document.getElementById('colorHex').textContent=c.toUpperCase();
+  const r=parseInt(c.slice(1,3),16),g=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);
+  document.getElementById('colorRgb').textContent=`rgb(${r},${g},${b})`;
+}
+
+// ===================== TIMER =====================
+let swInterval=null,swMs=0,swRunning=false,swLaps=[];
+let cdInterval=null,cdRunning=false,cdTotal=0,cdLeft=0;
+function switchTimer(mode,btn){
+  document.querySelectorAll('.tabs .tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('timerStopwatch').style.display=mode==='stopwatch'?'block':'none';
+  document.getElementById('timerCountdown').style.display=mode==='countdown'?'block':'none';
+}
+function fmtMs(ms){
+  const m=Math.floor(ms/60000),s=Math.floor((ms%60000)/1000),c=Math.floor((ms%1000)/10);
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(c).padStart(2,'0')}`;
+}
+function swStart(){
+  if(swRunning){swRunning=false;clearInterval(swInterval);document.getElementById('swStartBtn').textContent='▶ Davom';}
+  else{swRunning=true;const start=Date.now()-swMs;swInterval=setInterval(()=>{swMs=Date.now()-start;document.getElementById('swDisplay').textContent=fmtMs(swMs);},16);document.getElementById('swStartBtn').textContent='⏸ Pause';}
+}
+function swReset(){swRunning=false;clearInterval(swInterval);swMs=0;swLaps=[];document.getElementById('swDisplay').textContent='00:00.00';document.getElementById('swStartBtn').textContent='▶ Start';document.getElementById('lapList').innerHTML='';}
+function swLap(){if(!swRunning)return;swLaps.push(fmtMs(swMs));const d=document.getElementById('lapList');const el=document.createElement('div');el.style.cssText='padding:4px 0;border-bottom:1px solid var(--border);';el.textContent=`Lap ${swLaps.length}: ${swLaps[swLaps.length-1]}`;d.insertBefore(el,d.firstChild);}
+function cdStart(){
+  if(cdRunning){cdRunning=false;clearInterval(cdInterval);return;}
+  if(!cdLeft){cdLeft=(+document.getElementById('cdMin').value||0)*60+(+document.getElementById('cdSec').value||0);}
+  if(!cdLeft)return;
+  cdRunning=true;
+  cdInterval=setInterval(()=>{
+    cdLeft--;
+    const m=Math.floor(cdLeft/60),s=cdLeft%60;
+    document.getElementById('cdDisplay').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(cdLeft<=0){clearInterval(cdInterval);cdRunning=false;cdLeft=0;showToast('⏳ Vaqt tugadi!');}
+  },1000);
+}
+function cdReset(){cdRunning=false;clearInterval(cdInterval);cdLeft=0;document.getElementById('cdDisplay').textContent='00:00';}
+
+// ===================== NOTES =====================
+let notes=JSON.parse(localStorage.getItem('ziyoNotes')||'[]');
+function renderNotes(){
+  const list=document.getElementById('noteList');
+  list.innerHTML='';
+  notes.forEach((n,i)=>{
+    const el=document.createElement('div');el.className='note-item';
+    el.innerHTML=`<span>${n}</span><button onclick="deleteNote(${i})">✕</button>`;
+    list.appendChild(el);
+  });
+}
+function addNote(){
+  const inp=document.getElementById('noteInput');
+  if(!inp.value.trim())return;
+  notes.unshift(inp.value.trim());
+  inp.value='';
+  localStorage.setItem('ziyoNotes',JSON.stringify(notes));
+  renderNotes();
+}
+function deleteNote(i){notes.splice(i,1);localStorage.setItem('ziyoNotes',JSON.stringify(notes));renderNotes();}
+renderNotes();
+
+// ===================== CURRENCY =====================
+const rates={USD:1,EUR:0.92,RUB:90,UZS:12800,GBP:0.79,JPY:149};
+function convertCurrency(){
+  const amt=parseFloat(document.getElementById('currAmount').value)||0;
+  const from=document.getElementById('currFrom').value;
+  const to=document.getElementById('currTo').value;
+  const res=(amt/rates[from])*rates[to];
+  document.getElementById('currResult').textContent=`${amt} ${from} = ${res.toFixed(2)} ${to}`;
+}
+function swapCurrency(){const f=document.getElementById('currFrom'),t=document.getElementById('currTo');const tmp=f.value;f.value=t.value;t.value=tmp;convertCurrency();}
+convertCurrency();
+
+// ===================== SNAKE GAME =====================
+let snakeGame=null;
+const sc=document.getElementById('snakeCanvas');
+const sctx=sc.getContext('2d');
+const CELL=20,COLS=Math.floor(sc.width/CELL),ROWS=Math.floor(sc.height/CELL);
+let snake,dir,food,score,bestScore=0,gameRunning=false,gameInterval;
+function resetSnake(){
+  if(gameInterval)clearInterval(gameInterval);
+  gameRunning=false;
+  snake=[{x:Math.floor(COLS/2),y:Math.floor(ROWS/2)}];
+  dir={x:1,y:0};
+  score=0;
+  spawnFood();
+  document.getElementById('snakeScore').textContent=0;
+  drawSnake();
+}
+function spawnFood(){food={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};}
+function startSnake(){
+  resetSnake();
+  gameRunning=true;
+  gameInterval=setInterval(tickSnake,130);
+}
+function tickSnake(){
+  const head={x:(snake[0].x+dir.x+COLS)%COLS,y:(snake[0].y+dir.y+ROWS)%ROWS};
+  if(snake.some(s=>s.x===head.x&&s.y===head.y)){
+    clearInterval(gameInterval);gameRunning=false;
+    if(score>bestScore){bestScore=score;document.getElementById('snakeBest').textContent=bestScore;}
+    showToast('💀 O\'yin tugadi! Ball: '+score);
+    return;
+  }
+  snake.unshift(head);
+  if(head.x===food.x&&head.y===food.y){score++;document.getElementById('snakeScore').textContent=score;spawnFood();}
+  else snake.pop();
+  drawSnake();
+}
+function drawSnake(){
+  sctx.clearRect(0,0,sc.width,sc.height);
+  sctx.fillStyle='#0a2a1a';
+  for(let x=0;x<COLS;x++)for(let y=0;y<ROWS;y++){sctx.fillRect(x*CELL,y*CELL,CELL-1,CELL-1);}
+  sctx.fillStyle='#10b981';
+  snake.forEach((s,i)=>{
+    sctx.globalAlpha=i===0?1:0.85-i/snake.length*0.5;
+    const r=i===0?8:5;
+    sctx.beginPath();sctx.roundRect(s.x*CELL+1,s.y*CELL+1,CELL-2,CELL-2,r);sctx.fill();
+  });
+  sctx.globalAlpha=1;
+  sctx.font='18px serif';sctx.textAlign='center';sctx.textBaseline='middle';
+  sctx.fillText('🍎',food.x*CELL+CELL/2,food.y*CELL+CELL/2);
+  if(!gameRunning){
+    sctx.fillStyle='rgba(0,0,0,0.7)';sctx.fillRect(0,0,sc.width,sc.height);
+    sctx.fillStyle='#10b981';sctx.font='bold 16px Unbounded, monospace';sctx.textAlign='center';
+    sctx.fillText("▶ Boshlash uchun bosing",sc.width/2,sc.height/2);
+  }
+}
+document.addEventListener('keydown',e=>{
+  if(!gameRunning)return;
+  const k={ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1},ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0},w:{x:0,y:-1},s:{x:0,y:1},a:{x:-1,y:0},d:{x:1,y:0}};
+  if(k[e.key]){
+    const nd=k[e.key];
+    if(nd.x!==-dir.x||nd.y!==-dir.y)dir=nd;
+    e.preventDefault();
+  }
+});
+sc.addEventListener('click',()=>{if(!gameRunning)startSnake();});
+// Touch swipe for snake
+let touchStartX=0,touchStartY=0;
+sc.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;e.preventDefault();},{passive:false});
+sc.addEventListener('touchend',e=>{
+  if(!gameRunning){startSnake();return;}
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  const dy=e.changedTouches[0].clientY-touchStartY;
+  if(Math.abs(dx)>Math.abs(dy)){
+    if(dx>20&&dir.x!=-1)dir={x:1,y:0};
+    else if(dx<-20&&dir.x!=1)dir={x:-1,y:0};
+  } else {
+    if(dy>20&&dir.y!=-1)dir={x:0,y:1};
+    else if(dy<-20&&dir.y!=1)dir={x:0,y:-1};
+  }
+  e.preventDefault();
+},{passive:false});
+resetSnake();
+
+// ===================== QUIZ =====================
+const quizData=[
+  {q:"O'zbekistonning poytaxti qaysi shahar?",a:["Toshkent","Samarqand","Buxoro","Namangan"],correct:0},
+  {q:"Quyosh sistemasining eng katta sayyorasi qaysi?",a:["Saturn","Yupiter","Neptun","Uran"],correct:1},
+  {q:"1+1 ni 1 ga bo'lsak natija nechta?",a:["1","2","3","0"],correct:1},
+  {q:"HTML so'zining to'liq ma'nosi nima?",a:["HyperText Markup Language","HighText Machine Language","HyperTransfer Markup Language","HomeText Markup Language"],correct:0},
+  {q:"Suv necha gradusda muzlaydi?",a:["4°C","0°C","-10°C","2°C"],correct:1},
+  {q:"Dunyo bo'yicha eng ko'p ishlatiladigan dasturlash tili?",a:["Python","Java","JavaScript","C++"],correct:2},
+  {q:"Insonning normal qon bosimi qancha?",a:["100/60","120/80","140/90","110/70"],correct:1},
+  {q:"Quyosh Yerdan taxminan qancha masofada?",a:["100 mln km","150 mln km","200 mln km","50 mln km"],correct:1},
+  {q:"Pi (π) sonining birinchi 4 raqami?",a:["3.141","3.142","3.143","3.144"],correct:0},
+  {q:"O'zbekiston nechanchi yil mustaqillikka erishdi?",a:["1990","1992","1991","1993"],correct:2},
+];
+let quizIdx=0,quizScore=0,quizAnswered=false;
+function startQuiz(){
+  quizIdx=0;quizScore=0;quizAnswered=false;
+  showQuestion();
+}
+function showQuestion(){
+  if(quizIdx>=quizData.length){
+    document.getElementById('quizContainer').innerHTML=`
+      <div class="quiz-score">
+        <div style="font-size:3rem;margin-bottom:0.5rem;">${quizScore>=7?'🏆':quizScore>=5?'😊':'😅'}</div>
+        <div>Natija: ${quizScore}/${quizData.length}</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin:0.5rem 0;">${quizScore>=7?'Ajoyib!':quizScore>=5?'Yaxshi!':'Ko\'proq o\'rganing!'}</div>
+        <button class="mini-btn mb-primary" onclick="startQuiz()">🔄 Qaytadan</button>
+      </div>`;return;
+  }
+  const q=quizData[quizIdx];
+  document.getElementById('quizContainer').innerHTML=`
+    <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.5rem;">Savol ${quizIdx+1}/${quizData.length} • Ball: ${quizScore}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-options">${q.a.map((a,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i})">${a}</button>`).join('')}</div>`;
+  quizAnswered=false;
+}
+function answerQuiz(i){
+  if(quizAnswered)return;quizAnswered=true;
+  const q=quizData[quizIdx];
+  const btns=document.querySelectorAll('.quiz-opt');
+  btns[q.correct].classList.add('correct');
+  if(i!==q.correct)btns[i].classList.add('wrong');
+  else quizScore++;
+  setTimeout(()=>{quizIdx++;showQuestion();},1000);
+}
+
+// ===================== MEMORY GAME =====================
+const memEmojis=['🦊','🦁','🐼','🦋','🌸','⚡','🎯','🍕'];
+let memCards=[],memFlipped=[],memMatched=0,memTries=0,memLock=false;
+function startMemory(){
+  memMatched=0;memTries=0;memFlipped=[];memLock=false;
+  document.getElementById('memTries').textContent=0;
+  document.getElementById('memPairs').textContent=0;
+  const deck=[...memEmojis,...memEmojis].sort(()=>Math.random()-0.5);
+  const grid=document.getElementById('memGrid');grid.innerHTML='';
+  deck.forEach((e,i)=>{
+    const card=document.createElement('div');
+    card.style.cssText=`background:var(--surface);border:1px solid var(--border);border-radius:10px;height:56px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;transition:all 0.3s;user-select:none;`;
+    card.dataset.idx=i;card.dataset.emoji=e;card.textContent='❓';
+    card.addEventListener('click',()=>flipMemCard(card));
+    grid.appendChild(card);
+  });
+}
+function flipMemCard(card){
+  if(memLock||memFlipped.includes(card)||card.dataset.revealed)return;
+  card.textContent=card.dataset.emoji;card.style.background='rgba(124,58,237,0.1)';card.style.borderColor='var(--accent1)';
+  memFlipped.push(card);
+  if(memFlipped.length===2){
+    memLock=true;memTries++;document.getElementById('memTries').textContent=memTries;
+    const [a,b]=memFlipped;
+    if(a.dataset.emoji===b.dataset.emoji){
+      a.style.borderColor='var(--accent4)';b.style.borderColor='var(--accent4)';
+      a.dataset.revealed=b.dataset.revealed='1';
+      memMatched++;document.getElementById('memPairs').textContent=memMatched;
+      memFlipped=[];memLock=false;
+      if(memMatched===8)showToast('🏆 Hammasi topildi! Urinish: '+memTries);
+    } else {
+      setTimeout(()=>{
+        [a,b].forEach(c=>{c.textContent='❓';c.style.background='var(--surface)';c.style.borderColor='var(--border)';});
+        memFlipped=[];memLock=false;
+      },900);
+    }
+  }
+}
+startMemory();
+
+// ===================== TYPING TEST =====================
+const typingTexts=[
+  "Bilim - bu eng katta boylik. Kitob o'qish odatini shakllantirish kerak.",
+  "O'zbekiston - markaziy Osiyodagi buyuk davlat, qadimiy madaniyat maskani.",
+  "Dasturlash - bu kelajakning eng muhim ko'nikmalaridan biridir.",
+  "Matematik va mantiqiy fikrlash har bir insonga foydali.",
+  "Tabiat go'zalligini asrab qolish bizning vazifamizdir.",
+];
+let typingTarget='',typingStartTime=null,typingErrors=0;
+function resetTyping(){
+  typingTarget=typingTexts[Math.floor(Math.random()*typingTexts.length)];
+  const disp=document.getElementById('typingTextDisplay');
+  disp.innerHTML=typingTarget.split('').map((c,i)=>`<span id="tc${i}">${c}</span>`).join('');
+  document.getElementById('typingInput').value='';
+  document.getElementById('typingWPM').textContent=0;
+  document.getElementById('typingAcc').textContent=100;
+  typingStartTime=null;typingErrors=0;
+}
+function handleTyping(){
+  const input=document.getElementById('typingInput').value;
+  if(!typingStartTime&&input.length>0)typingStartTime=Date.now();
+  const elapsed=(Date.now()-typingStartTime)/60000;
+  typingErrors=0;
+  for(let i=0;i<typingTarget.length;i++){
+    const s=document.getElementById('tc'+i);
+    if(!s)continue;
+    if(i<input.length){
+      if(input[i]===typingTarget[i]){s.className='correct';}
+      else{s.className='wrong';typingErrors++;}
+    } else if(i===input.length){s.className='current';}
+    else{s.className='';}
+  }
+  if(input.length>0&&elapsed>0){
+    const wpm=Math.round((input.length/5)/elapsed);
+    document.getElementById('typingWPM').textContent=wpm;
+    const acc=Math.round(((input.length-typingErrors)/input.length)*100);
+    document.getElementById('typingAcc').textContent=Math.max(0,acc);
+  }
+  if(input===typingTarget){showToast('🎉 Barakalla! Tugadingiz!');}
+}
+resetTyping();
+
+// ===================== FLASHCARDS =====================
+const flashWords=[
+  {front:'Apple 🍎',back:'Olma'},
+  {front:'Book 📚',back:'Kitob'},
+  {front:'Computer 💻',back:'Kompyuter'},
+  {front:'Sun ☀️',back:'Quyosh'},
+  {front:'Water 💧',back:'Suv'},
+  {front:'House 🏠',back:'Uy'},
+  {front:'Friend 🤝',back:'Do\'st'},
+  {front:'Love ❤️',back:'Sevgi'},
+  {front:'Music 🎵',back:'Musiqa'},
+  {front:'Dream 💭',back:'Orzu'},
+];
+let flashIdx=0,flashFlipped=false;
+function showFlash(){
+  const w=flashWords[flashIdx];
+  document.getElementById('flashFront').textContent=w.front;
+  document.getElementById('flashBack').textContent=w.back;
+  document.getElementById('flashProgress').textContent=`${flashIdx+1} / ${flashWords.length}`;
+  document.getElementById('flashCard').classList.remove('flipped');flashFlipped=false;
+}
+function flipCard(){document.getElementById('flashCard').classList.toggle('flipped');}
+function nextFlash(){flashIdx=(flashIdx+1)%flashWords.length;showFlash();}
+function prevFlash(){flashIdx=(flashIdx-1+flashWords.length)%flashWords.length;showFlash();}
+showFlash();
+
+// ===================== LOREM IPSUM =====================
+const loremSentences=["Lorem ipsum dolor sit amet consectetur adipiscing elit.","Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Ut enim ad minim veniam quis nostrud exercitation ullamco.","Duis aute irure dolor in reprehenderit in voluptate velit esse.","Excepteur sint occaecat cupidatat non proident sunt in culpa."];
+const uzSentences=["Bilim insonning eng katta boyligi va kuchi hisoblanadi.","O'zbekiston tarixi qadimiy madaniyat va buyuk allomalar bilan boy.","Har bir kun yangi imkoniyat va yangi boshlanishdir.","Mehnat va sabr bilan har qanday maqsadga erishish mumkin.","Vatanni sevish - bu eng muqaddas tuyg'ulardan biridir."];
+function genLorem(){
+  const lang=document.getElementById('loremLang').value;
+  const count=+document.getElementById('loremCount').value||3;
+  const src=lang==='uz'?uzSentences:loremSentences;
+  let result='';
+  for(let i=0;i<count;i++){
+    let para='';
+    const n=Math.floor(Math.random()*3)+2;
+    for(let j=0;j<n;j++)para+=src[Math.floor(Math.random()*src.length)]+' ';
+    result+=para.trim()+'\n\n';
+  }
+  document.getElementById('loremOutput').textContent=result.trim();
+}
+
+// ===================== MEME GENERATOR =====================
+function drawMeme(){
+  const canvas=document.getElementById('memeCanvas');
+  const ctx=canvas.getContext('2d');
+  const bg=document.getElementById('memeBg').value;
+  const emoji=document.getElementById('memeEmoji').value;
+  const top=document.getElementById('memeTop').value||'Yuqori matn';
+  const bot=document.getElementById('memeBottom').value||'Pastki matn';
+  ctx.fillStyle=bg;ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.font='80px serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(emoji,canvas.width/2,canvas.height/2);
+  ctx.fillStyle='white';ctx.strokeStyle='black';ctx.lineWidth=3;
+  ctx.font='bold 22px Impact, Unbounded, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.strokeText(top.toUpperCase(),canvas.width/2,14);ctx.fillText(top.toUpperCase(),canvas.width/2,14);
+  ctx.textBaseline='bottom';
+  ctx.strokeText(bot.toUpperCase(),canvas.width/2,canvas.height-14);ctx.fillText(bot.toUpperCase(),canvas.width/2,canvas.height-14);
+}
+function downloadMeme(){
+  drawMeme();
+  const a=document.createElement('a');a.download='meme.png';
+  a.href=document.getElementById('memeCanvas').toDataURL();a.click();
+}
+drawMeme();
+
+// ===================== QR CODE =====================
+function generateQR(){
+  const text=document.getElementById('qrInput').value.trim()||'ZiyoHub';
+  const color=document.getElementById('qrColor').value;
+  const out=document.getElementById('qrOutput');
+  const size=200;
+  const canvas=document.createElement('canvas');canvas.width=size;canvas.height=size;
+  const ctx=canvas.getContext('2d');
+  const encoded=encodeURIComponent(text);
+  const img=new Image();
+  img.crossOrigin='anonymous';
+  img.src=`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encoded}&color=${color.slice(1)}&bgcolor=1a1a2e&format=png`;
+  img.onload=()=>{
+    ctx.drawImage(img,0,0);
+    const imgEl=document.createElement('img');
+    imgEl.src=canvas.toDataURL();
+    imgEl.style.cssText='border-radius:12px;border:1px solid var(--border);max-width:200px;';
+    out.innerHTML='';out.appendChild(imgEl);
+    const dl=document.createElement('a');dl.href=imgEl.src;dl.download='qr.png';
+    dl.className='mini-btn mb-secondary';dl.textContent='⬇️ Yuklab olish';
+    dl.style.cssText='display:block;margin-top:8px;text-decoration:none;text-align:center;';
+    out.appendChild(dl);
+  };
+  img.onerror=()=>{
+    out.innerHTML=`<div style="color:var(--muted);font-size:0.85rem;">QR yaratish uchun internet kerak</div>`;
+  };
+}
+
+// ===================== TODO =====================
+let todos=JSON.parse(localStorage.getItem('ziyoTodos')||'[]');
+let dragSrc=null;
+function renderTodos(){
+  const list=document.getElementById('todoList');list.innerHTML='';
+  todos.forEach((t,i)=>{
+    const el=document.createElement('div');
+    el.className='drag-item';el.draggable=true;
+    el.innerHTML=`<span style="cursor:grab;">⋮⋮</span><span style="flex:1;${t.done?'text-decoration:line-through;color:var(--muted)':''}">${t.text}</span><button style="background:none;border:none;cursor:pointer;color:${t.done?'var(--accent4)':'var(--muted)'};" onclick="toggleTodo(${i})">${t.done?'✅':'⬜'}</button><button style="background:none;border:none;cursor:pointer;color:var(--accent5);" onclick="deleteTodo(${i})">✕</button>`;
+    el.addEventListener('dragstart',()=>{dragSrc=i;el.style.opacity='0.5';});
+    el.addEventListener('dragend',()=>{el.style.opacity='1';});
+    el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('drag-over');});
+    el.addEventListener('dragleave',()=>el.classList.remove('drag-over'));
+    el.addEventListener('drop',()=>{el.classList.remove('drag-over');if(dragSrc!==null&&dragSrc!==i){const tmp=todos[dragSrc];todos.splice(dragSrc,1);todos.splice(i,0,tmp);saveTodos();}});
+    list.appendChild(el);
+  });
+}
+function addTodo(){const inp=document.getElementById('todoInput');if(!inp.value.trim())return;todos.unshift({text:inp.value.trim(),done:false});inp.value='';saveTodos();}
+function toggleTodo(i){todos[i].done=!todos[i].done;saveTodos();}
+function deleteTodo(i){todos.splice(i,1);saveTodos();}
+function saveTodos(){localStorage.setItem('ziyoTodos',JSON.stringify(todos));renderTodos();}
+renderTodos();
+
+// ===================== KEYBOARD SHORTCUTS =====================
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.key==='k'){e.preventDefault();document.querySelector('.nav-btn').focus();}
+});
+
+// ===================== SERVICE WORKER (PWA) =====================
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg=>console.log('SW registered:', reg.scope))
+      .catch(err=>console.log('SW error:', err));
+  });
+}
+
+// ===================== OFFLINE / ONLINE DETECTION =====================
+const netBanner = document.getElementById('netBanner');
+let bannerTimer = null;
+
+function showBanner(offline){
+  const icon = document.getElementById('netIcon');
+  const msg = document.getElementById('netMsg');
+  if(offline){
+    netBanner.className = 'offline show';
+    icon.textContent = '📡';
+    msg.textContent = 'Internet yo\'q — sayt oflayn ishlayapti';
+  } else {
+    netBanner.className = 'online show';
+    icon.textContent = '✅';
+    msg.textContent = 'Internet ulanishi qayta tiklandi!';
+    clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(hideBanner, 3000);
+  }
+}
+
+function hideBanner(){
+  netBanner.classList.remove('show');
+}
+
+function dismissBanner(){
+  hideBanner();
+}
+
+function retryConnection(){
+  const msg = document.getElementById('netMsg');
+  msg.textContent = '⏳ Tekshirilmoqda...';
+  fetch('https://www.google.com/favicon.ico', {mode:'no-cors', cache:'no-store'})
+    .then(()=>{ showBanner(false); })
+    .catch(()=>{ msg.textContent = 'Internet yo\'q — sayt oflayn ishlayapti'; });
+}
+
+// Show banner on load if offline
+window.addEventListener('load', ()=>{
+  if(!navigator.onLine) showBanner(true);
+});
+
+window.addEventListener('offline', ()=> showBanner(true));
+window.addEventListener('online',  ()=> showBanner(false));
+
+// Also update QR tool message when offline
+const _origGenQR = generateQR;
+function generateQR(){
+  if(!navigator.onLine){
+    const out = document.getElementById('qrOutput');
+    // Offline QR fallback: draw simple QR-like pattern with Canvas
+    const text = document.getElementById('qrInput').value.trim() || 'ZiyoHub';
+    const color = document.getElementById('qrColor').value;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 200;
+    canvas.style.cssText = 'border-radius:12px;border:1px solid var(--border);max-width:200px;';
+    const ctx = canvas.getContext('2d');
+    // Background
+    ctx.fillStyle = '#1a1a2e'; ctx.fillRect(0,0,200,200);
+    // Draw simple QR-like pattern from text hash
+    ctx.fillStyle = color;
+    let hash = 0;
+    for(let i=0;i<text.length;i++) hash = ((hash<<5)-hash)+text.charCodeAt(i);
+    const cell = 8, cols = 25;
+    for(let row=0;row<cols;row++){
+      for(let col=0;col<cols;col++){
+        const bit = (hash ^ (row*col+row+col*7)) & 1;
+        if(bit||(row<7&&col<7)||(row<7&&col>17)||(row>17&&col<7)){
+          ctx.fillRect(col*cell, row*cell, cell-1, cell-1);
+        }
+      }
+    }
+    // Corner squares
+    [[0,0],[0,18],[18,0]].forEach(([r,c])=>{
+      ctx.strokeStyle = color; ctx.lineWidth = 2;
+      ctx.strokeRect(c*cell+1, r*cell+1, 6*cell-2, 6*cell-2);
+      ctx.fillRect(c*cell+2, r*cell+2, 5*cell-4, 5*cell-4);
+    });
+    // Center text
+    ctx.fillStyle = 'rgba(10,10,20,0.8)'; ctx.fillRect(60,80,80,40);
+    ctx.fillStyle = '#aaa'; ctx.font = '10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('⚠️ Oflayn rejim', 100, 97);
+    ctx.fillText(text.slice(0,18), 100, 112);
+    out.innerHTML = '';
+    out.appendChild(canvas);
+    out.innerHTML += '<div style="color:var(--accent3);font-size:0.78rem;margin-top:6px;text-align:center;">⚠️ Internet bo\'lsa aniq QR kod ko\'rinadi</div>';
+    return;
+  }
+  _origGenQR();
+}
+
+// ===================== PWA INSTALL PROMPT =====================
+let deferredPrompt = null;
+const installBanner = document.getElementById('installBanner');
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show install banner after 5 seconds if not dismissed before
+  if(!localStorage.getItem('ziyoInstallDismissed')){
+    setTimeout(()=> installBanner.classList.add('show'), 5000);
+  }
+});
+
+function installPWA(){
+  if(!deferredPrompt){ showToast('📱 Brauzer menyusidan qo\'shing!'); dismissInstall(); return; }
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(choice => {
+    if(choice.outcome==='accepted') showToast('🎉 ZiyoHub o\'rnatildi!');
+    deferredPrompt = null;
+    dismissInstall();
+  });
+}
+
+function dismissInstall(){
+  installBanner.classList.remove('show');
+  localStorage.setItem('ziyoInstallDismissed','1');
+}
+
+window.addEventListener('appinstalled', ()=>{
+  showToast('🎉 ZiyoHub muvaffaqiyatli o\'rnatildi!');
+  installBanner.classList.remove('show');
+});
+</script>
+</body>
+</html>
